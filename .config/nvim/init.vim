@@ -74,7 +74,26 @@ set mouse+=a
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
+Plug 'preservim/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
+"open nerdtree if no file is specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"quit if nerdree is only remaining window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"other nerdtree config
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+
+"key mappings
+map <C-n> :NERDTreeToggle<CR>
 
 "colorscheme gruvbox
 "set background=dark
