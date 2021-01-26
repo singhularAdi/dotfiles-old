@@ -78,7 +78,12 @@ Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 call plug#end()
+
+"configuration for vim-latex-live-preview
+autocmd Filetype tex setl updatetime=1
+let g:livepreview_previewer = 'open -a Preview'
 
 "open nerdtree if no file is specified
 autocmd StdinReadPre * let s:std_in=1
@@ -94,6 +99,8 @@ let NERDTreeQuitOnOpen = 1
 
 "key mappings
 map <C-n> :NERDTreeToggle<CR>
+:imap jk <Esc>
+:imap kj <Esc>
 
 "colorscheme gruvbox
 "set background=dark
