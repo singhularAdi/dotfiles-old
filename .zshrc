@@ -104,6 +104,10 @@ source /etc/zsh_command_not_found
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Aliases
+alias update='sudo apt update'
+alias upgrade='sudo apt upgrade'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
