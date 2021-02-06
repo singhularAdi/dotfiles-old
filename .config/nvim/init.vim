@@ -81,6 +81,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 call plug#end()
 
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
 "configuration for vim-latex-live-preview
 autocmd Filetype tex setl updatetime=1
 let g:livepreview_previewer = 'open -a Preview'
