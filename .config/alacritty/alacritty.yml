@@ -24,10 +24,10 @@ colors:
   primary:
     background: '#121212'
     foreground: '#A1B0B8'
-
+  
   # Normal colors
   normal:
-   black: '#01060E'
+   black: '#A1B0B8'
    red: '#EA6C73'
    green: '#91B362'
    yellow: '#FFC135'
@@ -43,9 +43,31 @@ colors:
    green: '#C3D82C'
    yellow: '#FFC135'
    blue: '#40C4FF'
-   magenta: '#D81B60'
+   magenta: '#121212'
    cyan: '#00ACC1'
    white: '#F5F5F5'
+   
+  # Normal colors
+  #normal:
+  # black: '#01060E'
+  # red: '#EA6C73'
+   #green: '#91B362'
+  # yellow: '#FFC135'
+  # blue: '#42A5F5'
+  # magenta: '#D81B60'
+  # cyan: '#00ACC1'
+  # white: '#F5F5F5'
+
+  # Bright colors
+  #bright:
+  # black: '#252525'
+  # red: '#FF443E'
+  # green: '#C3D82C'
+  # yellow: '#FFC135'
+  # blue: '#40C4FF'
+  # magenta: '#D81B60'
+  # cyan: '#00ACC1'
+  # white: '#F5F5F5'
 
 # Colors (Gruvbox dark)
 # colors:
