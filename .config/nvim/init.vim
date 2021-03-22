@@ -18,8 +18,8 @@ syntax on
 set noerrorbells visualbell t_vb=
 
 " Some basic config
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=4
+set shiftwidth=2
 set expandtab
 set smartindent
 set number
@@ -73,13 +73,22 @@ nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 set mouse+=a
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'morhetz/gruvbox'
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree'|
+            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons'  
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 Plug 'itchyny/lightline.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 call plug#end()
+
+" Enable material colorscheme and use darker
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+colorscheme material
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -91,10 +100,6 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
-
-"configuration for vim-latex-live-preview
-autocmd Filetype tex setl updatetime=1
-let g:livepreview_previewer = 'open -a Preview'
 
 "open nerdtree if no file is specified
 autocmd StdinReadPre * let s:std_in=1
@@ -108,10 +113,36 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
 
+"nerdtree git status indicators
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+                
+"hide [ ] in nerdtree + git plugin combo
+let g:NERDTreeGitStatusConcealBrackets = 1
+
 "key mappings
 map <C-n> :NERDTreeToggle<CR>
 :imap jk <Esc>
 :imap kj <Esc>
 
-"colorscheme gruvbox
-"set background=dark
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-clangd',
+  \ 'coc-sh',
+  \ 'coc-jedi']
+
