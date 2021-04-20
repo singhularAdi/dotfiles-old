@@ -1,14 +1,3 @@
-" Comments in Vimscript start with a `"`.
-
-" If you open this file in Vim, it'll be syntax highlighted for you.
-
-" Vim is based on Vi. Setting `nocompatible` switches from the default
-" Vi-compatibility mode and enables useful Vim functionality. This
-" configuration option turns out not to be necessary for the file named
-" '~/.vimrc', because Vim automatically enters nocompatible mode if that file
-" is present. But we're including it here just in case this config file is
-" loaded some other way (e.g. saved as `foo`, and then Vim started with
-" `vim -u foo`).
 set nocompatible
 
 " Turn on syntax highlighting.
@@ -31,17 +20,13 @@ set undofile
 set incsearch
 set ignorecase
 set smartcase
+set number relativenumber	" set hybrid line numbering
+set nu rnu			" set hybrid line numbering
+set clipboard=unnamedplus	" allow copy paste between vim and other apps
+set mouse=a
 
 " Disable the default Vim startup message.
 set shortmess+=I
-
-" This enables relative line numbering mode. With both number and
-" relativenumber enabled, the current line shows the true line number, while
-" all other lines (above and below) are numbered relative to the current line.
-" This is useful because you can tell, at a glance, what count is needed to
-" jump up or down to a particular line, by {count}k to go up or {count}j to go
-" down.
-set relativenumber
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
@@ -59,90 +44,29 @@ set backspace=indent,eol,start
 " for more information on this.
 set hidden
 
-" This setting makes search case-insensitive when all characters in the string
-" being searched are lowercase. However, the search becomes case-sensitive if
-" it contains any capital letters. This makes searching more convenient.
-
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 
-" Disable audible bell because it's annoying.
 
-" Enable mouse support. You should avoid relying on this too much, but it can
-" sometimes be convenient.
-set mouse+=a
+" Keybinds
+inoremap jk <Esc>
+inoremap kj <Esc>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'preservim/nerdtree'|
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'  
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" vim plug - plugins
+call plug#begin('~/.vim/plugged')
+  Plug 'tomasr/molokai'
+  Plug 'preservim/nerdtree'
+  Plug 'itchyny/lightline.vim'
 call plug#end()
 
-" Enable material colorscheme and use darker
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
+" Enabel molokai + 256 color support
+let g:rehash256 = 1
+colorscheme molokai
 
-colorscheme material
+" Nerdtree settings
 
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-"open nerdtree if no file is specified
+" Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-"quit if nerdree is only remaining window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-"other nerdtree config
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen = 1
-
-"nerdtree git status indicators
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
-                
-"hide [ ] in nerdtree + git plugin combo
-let g:NERDTreeGitStatusConcealBrackets = 1
-
-"key mappings
-map <C-n> :NERDTreeToggle<CR>
-:imap jk <Esc>
-:imap kj <Esc>
-
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ 'coc-clangd',
-  \ 'coc-sh',
-  \ 'coc-jedi']
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
 
