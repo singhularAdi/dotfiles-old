@@ -7,7 +7,7 @@ syntax on
 set noerrorbells visualbell t_vb=
 
 " Some basic config
-set tabstop=2 softtabstop=4
+set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
@@ -58,6 +58,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tomasr/molokai'
   Plug 'preservim/nerdtree'
   Plug 'itchyny/lightline.vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " Enabel molokai + 256 color support
