@@ -24,6 +24,7 @@ set number relativenumber	" set hybrid line numbering
 set nu rnu			" set hybrid line numbering
 set clipboard=unnamedplus	" allow copy paste between vim and other apps
 set mouse=a
+set encoding=UTF-8
 
 " Disable the default Vim startup message.
 set shortmess+=I
@@ -57,8 +58,10 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 call plug#begin('~/.vim/plugged')
   Plug 'tomasr/molokai'
   Plug 'preservim/nerdtree'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'itchyny/lightline.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 call plug#end()
 
 " Enabel molokai + 256 color support
@@ -70,4 +73,8 @@ colorscheme molokai
 " Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+
+" Source plugin configurations
+
+source $HOME/.config/nvim/plug-config/coc.vim
 
