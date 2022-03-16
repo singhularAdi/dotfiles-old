@@ -70,6 +70,15 @@ colorscheme molokai
 
 " Nerdtree settings
 
+" Coc extensions that need to be automatically installed 
+let g:coc_global_extensions = [
+      \'coc-markdownlint',
+      \'coc-highlight',
+      \'coc-json', 
+      \'coc-git',
+      \'coc-pyright',
+      \]
+
 " Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
