@@ -2,3 +2,4 @@
 .config/nvim/undodir/
 .config/nvim/.net*
 .config/coc/extensions/node_modules/
+.config/coc/suggest.txt
