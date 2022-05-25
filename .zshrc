@@ -129,7 +129,10 @@ unset __conda_setup
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # add alias for thefuck
 eval $(thefuck --alias fuck)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# add chezmoi to path
+export PATH=/home/aditya/bin:$PATH 
